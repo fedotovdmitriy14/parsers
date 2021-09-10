@@ -1,0 +1,12 @@
+.next_element
+# .find_next
+# .find_next_sibling
+# .find_previous_sibling
+# .modulefinder
+# .find_all
+# .get("href")
+# .text
+# .find_parent
+# .find_parents
+#
+# find_a_by_text = soup.find("a", text="re.compile("[Оо]дежда)
