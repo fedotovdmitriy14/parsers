@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-import csv
 import json
 
 URL = 'https://auto.ru/cars/mitsubishi/all/'
@@ -35,10 +34,10 @@ def parse_pages():
 
         cnt += 1
 
-    print(cars_dict)
 
 
 
-parse_pages()
+if __name__ == "__main__":
+    parse_pages()
 
 
