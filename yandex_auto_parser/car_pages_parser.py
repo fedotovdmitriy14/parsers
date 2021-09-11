@@ -2,26 +2,39 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 
-
 URL = 'https://auto.ru/cars/mitsubishi/all/'
 url_pages = "https://auto.ru/moskva/cars/mitsubishi/all/?page=1"
+
+
+
+def parse_pages():
+    res = requests.get("https://auto.ru/moskva/cars/mitsubishi/outlander/21397304/all/?page=1", "html.parser")
+    res.encoding = "utf-8"
+    html = res.text
+
+    cars_dict = {}
+    soup = BeautifulSoup(html, "html.parser")
+    items = soup.find_all('a', class_='Link ListingItemTitle__link')
+    # print(items)
+
+
+    for item in items:
+        car_name = item.get_text()
+        car_href = item.get("href")
+        cars_dict[car_href] = car_name
+
+    print(cars_dict)
+parse_pages()
+
+
+
+
+
 
 def get_html(url, params=None):
     r = requests.get(url, params=params)
     r.encoding = 'utf-8'
     return r
-
-
-
-# def get_pages_count(html):
-#     soup = BeautifulSoup(html, "html.parser")
-#     pagination = soup.find_all('span', class_="Button__content").find_all('span', class_="Button__text")
-#     if pagination:
-#         return int(pagination[-1].get_text())
-#     else:
-#         return 1
-#     print(pagination)
-
 
 
 def get_content(html):
@@ -56,6 +69,8 @@ def get_content(html):
                 )
 
 
+def parse_pages(html):
+    url_pages = "https://auto.ru/moskva/cars/mitsubishi/all/?page=1"
 
 
 def parse():
@@ -66,5 +81,6 @@ def parse():
     else:
         print('error')
 
-if __name__ == "__main__":
-    parse()
+
+# if __name__ == "__main__":
+#     parse()
