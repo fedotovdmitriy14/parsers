@@ -12,7 +12,6 @@ url = "https://health-diet.ru/table_calorie/?utm_source=leftMenu&utm_medium=tabl
 
 req = requests.get(url, headers=headers)
 src = req.text
-# print(src)
 
 # with open("index.html", "w", encoding="utf-8") as f:
 #     f.write(src)
@@ -60,7 +59,7 @@ for name, href in all_categories.items():
 
     soup = BeautifulSoup(src, "lxml")
 
-    count += 1
+    # count += 1
 
     # проверка страницы на наличие таблицы с продуктами
     alert_block = soup.find(class_="uk-alert-danger")
