@@ -1,2 +1,10 @@
 .idea/
-main.py
+*.img
+*.pdf
+data/
+*.json
+*.csv
+car_data/
+car_pages/
+images/
+

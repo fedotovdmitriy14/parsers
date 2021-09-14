@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import json
 
 URL = 'https://auto.ru/cars/mitsubishi/all/'
-url_pages = "https://auto.ru/moskva/cars/mitsubishi/all/?page=1"
+
 
 
 
@@ -20,11 +20,14 @@ def parse_pages():
         soup = BeautifulSoup(html, "html.parser")
 
         items = soup.find_all('a', class_='Link ListingItemTitle__link')
+        # items = soup.find("div", class_="ListingItem__column ListingItem__column_left")
 
         if len(items) != 0:
             for item in items:
                 car_name = item.get_text()
                 car_href = item.get("href")
+                # car_href = items.find('a', class_='Link ListingItemTitle__link').get("href")
+                # car_name = item.find("div", class_="ListingItemTechSummaryDesktop__column").get_text()
                 cars_dict[car_href] = car_name
 
             with open(f"car_pages/{cnt}.json", "w") as file:
