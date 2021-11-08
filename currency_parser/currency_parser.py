@@ -2,6 +2,7 @@ from lxml import etree
 import requests
 
 
+
 def get_and_convert_currency():
     url = 'http://www.cbr.ru/scripts/XML_daily.asp'
     r = requests.get(url=url)
@@ -21,10 +22,18 @@ def get_and_convert_currency():
             if elem.text == 'Венгерских форинтов' or elem.text == 'Норвежских крон':
                 currency_dict[elem.text] = []
                 currency_dict[elem.text].append(int((n[i - 1].text)))
-                currency_dict[elem.text].append(n[i + 1].text)
+                correct_format_price = n[i + 1].text.replace(',', '.')
+                currency_dict[elem.text].append(float(correct_format_price))
                 break
 
-    return currency_dict
+    one_crone = currency_dict['Норвежских крон'][1] / currency_dict['Норвежских крон'][0]
+
+    one_forint = currency_dict['Венгерских форинтов'][1] / currency_dict['Венгерских форинтов'][0]
+
+    print(currency_dict)
+
+    return one_crone / one_forint
 
 
 print(get_and_convert_currency())
+
